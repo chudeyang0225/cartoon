@@ -17,7 +17,7 @@ class ComicSpider(scrapy.Spider):
         # 章节链接server域名
         self.server_link = 'http://comic.kukudm.com'
         self.allowed_domains = ['comic.kukudm.com']
-        self.start_urls = ['http://comic.kukudm.com/comiclist/3/']
+        self.start_urls = ['http://comic.kukudm.com/comiclist/941/']
         # 匹配图片地址的正则表达式
         self.pattern_img = re.compile(r'\+"(.+)\'><span')
 
