@@ -1,5 +1,5 @@
 import os.path
-import smtplib, requests
+import smtplib, requests, time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -18,7 +18,7 @@ def pushmessage(title):
             'source':'s-6ff6f42b-68c4-4daa-b1eb-b7444d18',
             'receiver':'u-3c76edda-e339-48d6-82e9-95d1a4b0',
             'title':'New Comic Update!',
-            'content':'%s updated! Check Kindle!'%title
+            'content':'Comic updated! Check Kindle!%s'%title
         }
     )
 
@@ -29,6 +29,7 @@ _to = "deyangchu@gmail.com"
 def send_email():
     path = mangapath
     files = os.listdir(path)
+    newfiles = []
     for file in files:
         if os.path.splitext(file)[1] == ".pdf":
             file_path = os.path.join(path,file)
@@ -49,7 +50,15 @@ def send_email():
             s.login(_user,_pwd)
             s.sendmail(_user,_to, msg.as_string())
             s.close
-            pushmessage(os.path.splitext(file)[0])
+            newfiles.append(os.path.splitext(file)[0])
+            time.sleep(30)
+    return newfiles
 
-send_email()
+
+
+newfiles = send_email()
+string=''
+for file in newfiles:
+    string = string+'\n'+file
+pushmessage(string)
 # os.system('rm -rf %s/*'%settings.IMAGES_STORE)
