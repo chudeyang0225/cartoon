@@ -40,7 +40,7 @@ class ComicSpider(scrapy.Spider):
             item['dir_name'] = dir_names[index].replace(" ", "_")
             items.append(item)
         # Find last downloaded file name, then download newly published episode
-        print('Current file amount: '+len(items))
+        print('Current file amount: '+str(len(items)))
         with open (BASE_DIR+'/log.txt','r') as r:
             lastlen = r.read()
             print('Index of last update: '+lastlen)

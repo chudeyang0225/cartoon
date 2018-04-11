@@ -8,6 +8,8 @@
 #     http://doc.scrapy.org/en/latest/topics/settings.html
 #     http://scrapy.readthedocs.org/en/latest/topics/downloader-middleware.html
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
+import os
+# BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
 
 BOT_NAME = 'cartoon'
 
@@ -25,7 +27,7 @@ ITEM_PIPELINES = {
 	'cartoon.pipelines.ComicImgDownloadPipeline': 1,
 }
 
-IMAGES_STORE = '/home/deyangchu/manga'
+IMAGES_STORE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
 
 COOKIES_ENABLED = False
 
