@@ -8,7 +8,14 @@ from email import encoders
 mangapath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
 print(mangapath)
 
-
+def jpg2mobi():
+    folders = os.listdir(mangapath)
+    print(folders)
+    os.chdir(mangapath)
+    print(os.getcwd())
+    for folder in folders:
+        print(folder)
+        os.system('kcc-c2e -p KPW -u -s -r 1 %s/' % folder)
 
 
 def pushmessage(title):
@@ -22,8 +29,8 @@ def pushmessage(title):
         }
     )
 
-_user = "522132087@qq.com"
-_pwd = "rolev@6541"
+_user = "jiaruchy@gmail.com"
+_pwd = "wangming"
 _to = "deyangchu@gmail.com"
 
 def send_email():
@@ -31,10 +38,10 @@ def send_email():
     files = os.listdir(path)
     newfiles = []
     for file in files:
-        if os.path.splitext(file)[1] == ".pdf":
+        if os.path.splitext(file)[1] == ".mobi":
             file_path = os.path.join(path,file)
             msg = MIMEMultipart()
-            msg['Subject'] = 'convert'
+            msg['Subject'] = ''
             msg['From'] = _user
             msg['To'] = _to
             attfile = file_path
@@ -46,19 +53,19 @@ def send_email():
             att.add_header('Content-Disposition','attachment',filename=('gbk','',basename))
             encoders.encode_base64(att)
             msg.attach(att)
-            s = smtplib.SMTP_SSL("smtp.qq.com",465,timeout = 300)
+            s = smtplib.SMTP_SSL("smtp.gmail.com",465,timeout = 30)
             s.login(_user,_pwd)
             s.sendmail(_user,_to, msg.as_string())
             s.close
             newfiles.append(os.path.splitext(file)[0])
-            time.sleep(30)
+            time.sleep(3)
     return newfiles
 
-
-
+jpg2mobi()
 newfiles = send_email()
 string=''
 for file in newfiles:
     string = string+'\n'+file
-pushmessage(string)
+if string!='':
+    pushmessage(string)
 # os.system('rm -rf %s/*'%settings.IMAGES_STORE)

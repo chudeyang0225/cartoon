@@ -44,14 +44,13 @@ class ComicImgDownloadPipeline(object):
 						handle.write(block)
 			#返回图片保存路径
 		item['image_paths'] = images
-		#Convert into PDF
-		pic_list = os.listdir(dir_path)
-		pic_list.sort()
-		width,height = Image.open(dir_path+'/'+pic_list[0]).size
-		pdf = FPDF(unit = 'pt',format = [width,height])
-		for i in pic_list:
-			pdf.add_page()
-			pdf.image(dir_path+'/'+i,0,0)
-		pdf.output(settings.IMAGES_STORE+'/'+item['dir_name']+'.pdf','F')
-		# os.system('cp %s/* /home/deyangchu/mangabackup' % settings.IMAGES_STORE)
+		# #Convert into PDF
+		# pic_list = os.listdir(dir_path)
+		# pic_list.sort()
+		# width,height = Image.open(dir_path+'/'+pic_list[0]).size
+		# pdf = FPDF(unit = 'pt',format = [width,height])
+		# for i in pic_list:
+		# 	pdf.add_page()
+		# 	pdf.image(dir_path+'/'+i,0,0)
+		# pdf.output(settings.IMAGES_STORE+'/'+item['dir_name']+'.pdf','F')
 		return item
