@@ -60,7 +60,7 @@ def send_email():
             time.sleep(10)
     return newfiles
 
-# jpg2mobi()
+jpg2mobi()
 newfiles = send_email()
 string=''
 for file in newfiles:
