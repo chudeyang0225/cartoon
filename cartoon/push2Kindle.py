@@ -10,7 +10,6 @@ print(mangapath)
 
 def jpg2mobi():
     folders = os.listdir(mangapath)
-    print(folders)
     os.chdir(mangapath)
     print(os.getcwd())
     for folder in folders:
@@ -58,10 +57,10 @@ def send_email():
             s.sendmail(_user,_to, msg.as_string())
             s.close
             newfiles.append(os.path.splitext(file)[0])
-            time.sleep(3)
+            time.sleep(10)
     return newfiles
 
-jpg2mobi()
+# jpg2mobi()
 newfiles = send_email()
 string=''
 for file in newfiles:
