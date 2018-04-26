@@ -14,7 +14,7 @@ def jpg2mobi():
     print(os.getcwd())
     for folder in folders:
         print(folder)
-        os.system('kcc-c2e -p KPW -u -s -r 1 %s/' % folder)
+        os.system('kcc-c2e -p KV -u -r 1 %s/' % folder) # -u: upscale photo size, -r 1: combine double page and rotate
 
 
 def pushmessage(title):

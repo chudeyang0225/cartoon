@@ -10,4 +10,4 @@ os.chdir(mangapath)
 print(os.getcwd())
 for folder in folders:
     print(folder)
-    os.system('kcc-c2e -p KPW -u -s -r 1 %s/'%folder)
+    os.system('kcc-c2e -p KV -u -s -r 1 %s/'%folder)
