@@ -4,7 +4,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email import encoders
-
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 mangapath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
 print(mangapath)
 
@@ -62,6 +62,11 @@ def send_email():
 
 jpg2mobi()
 newfiles = send_email()
+
+with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/log.txt','w') as w:
+    w.write(r.readlines()[0])
+
+
 string=''
 for file in newfiles:
     string = string+'\n'+file

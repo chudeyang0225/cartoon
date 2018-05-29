@@ -44,7 +44,7 @@ class ComicSpider(scrapy.Spider):
         with open (BASE_DIR+'/log.txt','r') as r:
             lastlen = r.read()
             print('Index of last update: '+lastlen)
-        with open (BASE_DIR+'/log.txt','w') as w:
+        with open (BASE_DIR+'/logg.txt','w') as w:
             w.write(str(len(items)))
 
         # 根据每个章节的链接，发送Request请求，并传递item参数
