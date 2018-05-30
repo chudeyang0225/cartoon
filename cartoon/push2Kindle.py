@@ -30,7 +30,7 @@ def pushmessage(title):
 
 _user = "522132087@qq.com"
 _pwd = "rolev@6541"
-_to = "deyangchu@gmail.com"
+_to = "chudeyang@kindle.cn"
 
 def send_email():
     path = mangapath
