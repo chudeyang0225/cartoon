@@ -102,3 +102,4 @@ ENV/
 
 /cartoon/manga/
 .idea/
+data.json
