@@ -103,3 +103,5 @@ ENV/
 /cartoon/manga/
 .idea/
 /cartoon/data.json
+/cartoon/log.txt
+/cartoon/logg.txt

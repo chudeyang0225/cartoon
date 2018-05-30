@@ -28,8 +28,8 @@ def pushmessage(title):
         }
     )
 
-_user = "522132087@qq.com"
-_pwd = "rolev@6541"
+_user = "jiaruchy@gmail.com"
+_pwd = "wangming"
 _to = "chudeyang@kindle.cn"
 
 def send_email():
@@ -52,7 +52,7 @@ def send_email():
             att.add_header('Content-Disposition','attachment',filename=('gbk','',basename))
             encoders.encode_base64(att)
             msg.attach(att)
-            s = smtplib.SMTP_SSL("smtp.qq.com",465,timeout = 300)
+            s = smtplib.SMTP_SSL("smtp.gmail.com",465,timeout = 300)
             s.login(_user,_pwd)
             s.sendmail(_user,_to, msg.as_string())
             s.close
