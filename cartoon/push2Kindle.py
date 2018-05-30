@@ -1,4 +1,4 @@
-import os.path
+import os.path, json
 import smtplib, requests, time
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
@@ -63,8 +63,13 @@ def send_email():
 jpg2mobi()
 newfiles = send_email()
 
-with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/log.txt','w') as w:
-    w.write(r.readlines()[0])
+with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/data.json','r') as raw:
+    data = json.load(raw)
+    data['filenum'] = r.readlines()[0]
+    data['eptitle'] = newfiles[-1]
+
+with open(BASE_DIR+'/cartoon/data.json','w') as w:
+    json.dump(data, w, indent = 4)
 
 
 string=''

@@ -1,11 +1,15 @@
 # -*- coding: utf-8 -*-
 
 import re, os
-import scrapy
+import scrapy, json
 from scrapy import Selector
 from cartoon.items import ComicItem
 from cartoon import settings
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+with open(BASE_DIR+'/data.json') as f:
+    data = json.load(f)
+    comic = data['comic']
+    lastlen = str(data['filenum'])
 
 
 class ComicSpider(scrapy.Spider):
@@ -17,7 +21,7 @@ class ComicSpider(scrapy.Spider):
         # 章节链接server域名
         self.server_link = 'http://comic.kukudm.com'
         self.allowed_domains = ['comic.kukudm.com']
-        self.start_urls = ['http://comic.kukudm.com/comiclist/941/']
+        self.start_urls = ['http://comic.kukudm.com/comiclist/%s/'%comic]
         # 匹配图片地址的正则表达式
         self.pattern_img = re.compile(r'\+"(.+)\'><span')
 
@@ -41,9 +45,7 @@ class ComicSpider(scrapy.Spider):
             items.append(item)
         # Find last downloaded file name, then download newly published episode
         print('Current file amount: '+str(len(items)))
-        with open (BASE_DIR+'/log.txt','r') as r:
-            lastlen = r.read()
-            print('Index of last update: '+lastlen)
+        print('Index of last update: '+lastlen)
         with open (BASE_DIR+'/logg.txt','w') as w:
             w.write(str(len(items)))
 
