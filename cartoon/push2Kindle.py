@@ -69,7 +69,7 @@ with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/data
     data['eptitle'] = newfiles[-1]
 
 with open(BASE_DIR+'/cartoon/data.json','w') as w:
-    json.dump(data, w, indent = 4)
+    json.dump(data, w, indent = 4, ensure_ascii=False)
 
 
 string=''
