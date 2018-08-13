@@ -27,7 +27,9 @@ ITEM_PIPELINES = {
 	'cartoon.pipelines.ComicImgDownloadPipeline': 1,
 }
 
-IMAGES_STORE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
+base_dir = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+#IMAGES_STORE = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
+IMAGES_STORE = '/home/deyangchu/manga/'+base_dir.split('/')[-2]
 
 COOKIES_ENABLED = False
 

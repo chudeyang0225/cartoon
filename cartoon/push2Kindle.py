@@ -4,8 +4,8 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
 from email import encoders
+from settings import IMAGES_STORE as mangapath
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-mangapath = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
 print(mangapath)
 
 def jpg2mobi():
@@ -31,6 +31,15 @@ def pushmessage(title):
 _user = "jiaruchy@gmail.com"
 _pwd = "wangming"
 _to = "chudeyang@kindle.cn"
+
+def list_file():
+    path = mangapath
+    files = os.listdir(path)
+    newfiles = []
+    for i in files:
+        if os.path.splitext(i)[1] == ".mobi":
+            newfiles.append(os.path.splitext(i)[0])
+    return newfiles
 
 def send_email():
     path = mangapath
@@ -61,8 +70,9 @@ def send_email():
     return newfiles
 
 jpg2mobi()
-newfiles = send_email()
-
+os.system('find %s -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;'%mangapath)
+#newfiles = send_email()
+newfiles = list_file()
 with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/data.json','r') as raw:
     data = json.load(raw)
     data['filenum'] = r.readlines()[0]

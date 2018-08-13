@@ -5,9 +5,9 @@ export PATH
 if [ ! -f data.json ]; then
     echo '{"comic": "", "filenum": "0", "eptitle": ""}' > data.json
     echo "Edit config file!"
-    break
+    exit
 fi
 
-rm -rf ./manga/*
+#rm -rf ./manga/*
 scrapy crawl comic
 python3 push2Kindle.py
