@@ -24,7 +24,7 @@ def pushmessage(title):
             'source':'s-6ff6f42b-68c4-4daa-b1eb-b7444d18',
             'receiver':'u-3c76edda-e339-48d6-82e9-95d1a4b0',
             'title':'New Comic Update!',
-            'content':'Comic updated! Check Kindle!%s'%title
+            'content':'Comic updated! Download on Kindle from secret url!%s'%title
         }
     )
 
@@ -37,7 +37,7 @@ def list_file():
     files = os.listdir(path)
     newfiles = []
     for i in files:
-        if os.path.splitext(i)[1] == ".mobi":
+        if os.path.splitext(i)[1] == ".mobi" and (time.time()-os.path.getctime('%s/%s'%(path,i))<7200):
             newfiles.append(os.path.splitext(i)[0])
     return newfiles
 
