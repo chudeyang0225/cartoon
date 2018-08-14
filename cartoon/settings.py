@@ -10,7 +10,7 @@
 #     http://scrapy.readthedocs.org/en/latest/topics/spider-middleware.html
 import os
 # BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))+'/cartoon/manga'
-
+LOG_ENABLED = False
 BOT_NAME = 'cartoon'
 
 SPIDER_MODULES = ['cartoon.spiders']

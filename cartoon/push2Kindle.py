@@ -6,14 +6,12 @@ from email.mime.application import MIMEApplication
 from email import encoders
 from settings import IMAGES_STORE as mangapath
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-print(mangapath)
 
 def jpg2mobi():
-    folders = os.listdir(mangapath)
     os.chdir(mangapath)
-    print(os.getcwd())
+    folders = [name for name in os.listdir(mangapath) if os.path.isdir(name)]
+    #print(os.getcwd())
     for folder in folders:
-        print(folder)
         os.system('kcc-c2e -p KV -u -r 1 %s/' % folder) # -u: upscale photo size, -r 1: combine double page and rotate
 
 
@@ -54,7 +52,7 @@ def send_email():
             msg['To'] = _to
             attfile = file_path
             basename = os.path.basename(file_path)
-            print(basename)
+            #print(basename)
             fp = open(attfile,'rb')
             att = MIMEText(fp.read(),'base64','gbk')
             att['Content_Type'] = 'application/octer-stream'
@@ -70,17 +68,21 @@ def send_email():
     return newfiles
 
 jpg2mobi()
-os.system('find %s -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;'%mangapath)
+os.system('find %s -mindepth 1 -maxdepth 1 -type d -exec rm -r {} \;'%mangapath) # Delete all folders in directory(raw JPEG files)
 #newfiles = send_email()
 newfiles = list_file()
-with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/data.json','r') as raw:
-    data = json.load(raw)
-    data['filenum'] = r.readlines()[0]
-    data['eptitle'] = newfiles[-1]
+try:
+    with open (BASE_DIR+'/cartoon/logg.txt','r') as r, open (BASE_DIR+'/cartoon/data.json','r') as raw:
+        data = json.load(raw)
+        data['filenum'] = r.readlines()[0]
+        data['eptitle'] = newfiles[-1]
 
-with open(BASE_DIR+'/cartoon/data.json','w') as w:
-    json.dump(data, w, indent = 4, ensure_ascii=False)
-
+    with open(BASE_DIR+'/cartoon/data.json','w') as w:
+        json.dump(data, w, indent = 4, ensure_ascii=False)
+except IndexError:
+    pass
+except Exception as e:
+    print(e)
 
 string=''
 for file in newfiles:
