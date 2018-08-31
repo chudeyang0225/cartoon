@@ -52,7 +52,6 @@ class ComicSpider(scrapy.Spider):
         # 根据每个章节的链接，发送Request请求，并传递item参数
         for item in items[int(lastlen):]:
             print(item['dir_name'])
-            os.system('rm -rf %s/*' % settings.IMAGES_STORE)
             yield scrapy.Request(url=item['link_url'], meta={'item': item}, callback=self.parse2)
 
 
