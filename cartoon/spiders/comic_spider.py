@@ -24,6 +24,8 @@ class ComicSpider(scrapy.Spider):
         self.start_urls = ['http://comic.kukudm.com/comiclist/%s/'%comic]
         # 匹配图片地址的正则表达式
         self.pattern_img = re.compile(r'\+"(.+)\'><span')
+        self.pattern_img = re.compile(r'\+"(.+)\'><\/a')
+
 
     # 从start_requests发送请求
     def start_requests(self):

@@ -1,5 +1,6 @@
 import os.path, json
 import smtplib, requests, time
+from wechat_sender import Sender
 from email.mime.multipart import MIMEMultipart
 from email.mime.text import MIMEText
 from email.mime.application import MIMEApplication
@@ -13,7 +14,9 @@ def jpg2mobi():
     #print(os.getcwd())
     for folder in folders:
         os.system('kcc-c2e -p KV -u -r 1 %s/' % folder) # -u: upscale photo size, -r 1: combine double page and rotate
-
+def send2wechat(title):
+    sender = Sender(token='rolevblf')
+    sender.send('Comic updated! Download on Kindle from secret url!%s'%title)
 
 def pushmessage(title):
     requests.post(
@@ -89,4 +92,5 @@ for file in newfiles:
     string = string+'\n'+file
 if string!='':
     pushmessage(string)
+    send2wechat(string)
 # os.system('rm -rf %s/*'%settings.IMAGES_STORE)
