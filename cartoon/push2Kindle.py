@@ -15,7 +15,7 @@ def jpg2mobi():
     for folder in folders:
         os.system('kcc-c2e -p KV -u -r 1 %s/' % folder) # -u: upscale photo size, -r 1: combine double page and rotate
 def send2wechat(title):
-    sender = Sender(token='rolevblf')
+    sender = Sender(receivers='漫画更新push！',token='rolevblf')
     sender.send('Comic updated! Download on Kindle from secret url!%s'%title)
 
 def pushmessage(title):

@@ -17,7 +17,7 @@ class ComicSpider(scrapy.Spider):
 
     def __init__(self):
         # 图片链接server域名
-        self.server_img = 'http://n.1whour.com/'
+        self.server_img = 'http://n5.1whour.com/'
         # 章节链接server域名
         self.server_link = 'http://comic.kukudm.com'
         self.allowed_domains = ['comic.kukudm.com']
